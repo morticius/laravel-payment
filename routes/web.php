@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'payments', 'middleware' => ['auth'], 'as' => 'payments.'], function() {
+    Route::get('create', 'PaymentsController@create')->name('create');
+    Route::post('/', 'PaymentsController@store')->name('store');
+});
+
+
+
+Auth::routes();
+
